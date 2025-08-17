@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <conio.h>
+#include <string.h>
+
+struct cricket
+{
+    int plcode; 
+    char name[15]; 
+    char tname[15]; 
+    float btavg;
+};
+
+void main()
+{
+    struct cricket player[50], temp; 
+    int i, j, n;
+
+    clrscr();
+
+    printf("\nEnter No. of Players: "); 
+    scanf("%d", &n);
+
+    for(i = 0; i < n; i++)
+    {
+        printf("\nEnter Player Details\n"); 
+
+        printf("Enter player code : "); 
+        scanf("%d", &player[i].plcode);
+
+        printf("Enter player name : "); 
+        scanf("%s", player[i].name); 
+
+        printf("Enter team name : "); 
+        scanf("%s", player[i].tname); 
+
+        printf("Enter batting average : ");
+        scanf("%f", &player[i].btavg);
+    }
+
+    // Sorting by team name (alphabetical order)
+    for(i = 0; i < n-1; i++)
+    {
+        for(j = i+1; j < n; j++)
+        {
+            if (strcmp(player[i].tname, player[j].tname) > 0)
+            {
+                temp = player[i]; 
+                player[i] = player[j]; 
+                player[j] = temp;
+            }
+        }
+    }
+
+    printf("\n\tPLAYER DETAILS - TEAMWISE\n"); 
+    printf("\nP.Code\t%-15s%-15s%-10s\n", "Name", "Team", "Bat. Avg");
+
+    for(i = 0; i < n; i++)
+    {
+        printf("%d\t%-15s%-15s%.2f\n", 
+            player[i].plcode,
+            player[i].name,
+            player[i].tname,
+            player[i].btavg
+        );
+    }
+
+    getch();
+}
