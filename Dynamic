@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <conio.h>
+#include <stdlib.h>
+
+void main()
+{
+    int i, n, sum, min, max; 
+    int *arr, *p;
+
+    printf("Enter number of elements: "); 
+    scanf("%d", &n);
+
+    arr = (int *) malloc(n * sizeof(int)); 
+    if(arr == NULL)
+    {
+        printf("Memory allocation not feasible\n"); 
+        exit(-1);
+    }
+
+    printf("Enter array elements:\n"); 
+    for(p = arr; p < arr + n; p++)
+        scanf("%d", p);
+
+    sum = 0;
+    min = max = *arr;  // first element as starting point
+
+    for(p = arr; p < arr + n; p++)
+    {
+        if(min > *p)
+            min = *p;
+
+        if(max < *p)
+            max = *p;
+
+        sum = sum + *p;
+    }
+
+    printf("Sum of array : %d \n", sum); 
+    printf("Array minimum is: %d \n", min); 
+    printf("Array maximum is: %d \n", max);
+
+    free(arr); 
+    getch();
+}
